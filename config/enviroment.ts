@@ -7,8 +7,12 @@ dotenv.config({
 
 const PORT: any = process.env.PORT;
 const MONGO: any = process.env.MONGODB_URL;
+const EXPIRES_IN: any = process.env.EXPIRES_IN;
+const JWT_SECRET: any = process.env.JWT_SECRET;
 
 export default {
     PORT,
-    MONGO
+    MONGO,
+    EXPIRES_IN,
+    JWT_SECRET
 };

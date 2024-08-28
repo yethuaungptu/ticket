@@ -1,10 +1,9 @@
 import Event from '../models/event.model';
 
 const { getUser } = require('./base.service');
-
 const createEvent = async (req: any, res: any) => {
     const user = await getUser(req);
-    const event = new Event();
+    let event = new Event();
     event.name = req.body.name;
     event.creator = user.id;
     event.date = req.body.date;
@@ -12,6 +11,7 @@ const createEvent = async (req: any, res: any) => {
     event.venue = req.body.venue;
     event.description = req.body.description;
     event.tickets = req.body.tickets;
+
     const data = event.save();
     return data;
 };

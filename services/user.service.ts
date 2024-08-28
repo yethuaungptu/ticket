@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import bcrypt from 'bcryptjs';
 import User from '../models/user.model';
+import env from '../config/enviroment';
 
 const { checkDuplicateField, getUser } = require('./base.service');
 
@@ -22,11 +23,11 @@ const checkAccount = async (req: any, res: any) => {
 
 const login = async (req: any, res: any, data: any) => {
     if (data != null && bcrypt.compareSync(req.body.password, data.password)) {
-        const accessToken = jwt.sign({ id: data._id, name: data.name }, 'ticket@2024', {
-            expiresIn: '3h'
+        const accessToken = jwt.sign({ id: data._id, name: data.name }, env.JWT_SECRET, {
+            expiresIn: env.EXPIRES_IN
         });
         res.setHeader('Set-Cookie', [cookie.serialize('JWT_COOKIE_USER', accessToken, { path: '/' })]);
-        return true;
+        return data;
     } else {
         return false;
     }

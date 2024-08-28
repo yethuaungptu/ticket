@@ -7,9 +7,8 @@ exports.checkDuplicateField = async (obj: any, Model: any) => {
     const document = await Model.findOne(obj);
     if (document) {
         throw alreadyExistsError(Object.values(obj) + ' is duplicated', document);
-    } else {
-        return false;
     }
+    return false;
 };
 
 exports.getUser = async (req: any) => {
@@ -23,5 +22,5 @@ exports.getUser = async (req: any) => {
 exports.getEvent = async (id: string) => {
     const document = await Event.findById(id);
     if (document) return document;
-    else return false;
+    return false;
 };

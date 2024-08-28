@@ -23,7 +23,7 @@ const purchase = async (req: any, res: any) => {
             });
         }
     });
-    const eventUpdate = await Event.findByIdAndUpdate(req.body.eventId, { tickets: eventTickets });
+    await Event.findByIdAndUpdate(req.body.eventId, { tickets: eventTickets });
     const ticket = new Ticket();
     ticket.eventId = req.body.eventId;
     ticket.amount = price;
